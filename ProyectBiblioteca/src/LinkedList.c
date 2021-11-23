@@ -609,6 +609,7 @@ LinkedList* ll_filter(LinkedList* this, int (*fn)(void* element)){
 					control = ll_add(newll, pElement);
 					if(control == -1){
 						newll = NULL;
+                        puts("ERROR al cargar elementos en la lista");
 						break;
 					}
 				}
