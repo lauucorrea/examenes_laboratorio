@@ -568,13 +568,6 @@ int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
                     control2 = ll_set(this, j, pAux);
                 }
 
-                if(order == 0 && pFunc(elementoI, elementoJ) < 0)
-                {
-                	control1 = ll_set(this, i, elementoJ);
-                    control2 = ll_set(this, j, pAux);
-                }
-
-
                 if(control1 == -1 || control2 == -1){
                 	huboErrores = 0;
                 	break;
