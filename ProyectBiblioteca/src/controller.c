@@ -52,7 +52,7 @@ int controller_loadEditorialsFromText(char* path , LinkedList* pArrayListEditori
 }
 
 
-int controller_loadBooksFromFile(LinkedList* listaLibros ,int option, int* pFlagFileLoaded, char* nameFile)
+int controller_loadBooksFromFile(LinkedList* pArrayListBook ,LinkedList* pArrayListEditoriales,int option, int* pFlagFileLoaded, char* nameFile)
 {
 	int validation = -1;
 	char originalFile[] = "Data";
@@ -60,13 +60,13 @@ int controller_loadBooksFromFile(LinkedList* listaLibros ,int option, int* pFlag
 
 		switch(option){
 			case 1:
-				ll_clear(listaLibros);
+				ll_clear(pArrayListBook);
 				control = strcmp(nameFile, originalFile);
 				if(control == 0){
 					*pFlagFileLoaded = 0;
-					validation = controller_loadBooksFromText("src/data.csv", listaLibros);
+					validation = controller_loadBooksFromText("src/data.csv", pArrayListBook);
 					if(validation != -1){
-						controller_ListBooks(listaLibros);
+						controller_ListBooks(pArrayListBook, pArrayListEditoriales);
 					}
 				}else{
 					puts("El nombre del archivo esta mal ingresado");
@@ -174,7 +174,7 @@ int controller_addBook(LinkedList* pArrayListBook)
  * \return int
  *
  */
-int controller_ListBooks(LinkedList* pArrayListBook)
+int controller_ListBooks(LinkedList* pArrayListBook, LinkedList* pArrayListEditorial)
 {
 	eLibro* pBook;
 
@@ -205,7 +205,7 @@ int controller_ListBooks(LinkedList* pArrayListBook)
             	book_getPrecio(pBook, &precioObtenido);
             	book_getIdEditorial(pBook, &idEditorialObtenido);
 
-            	control = editorial_getEditorialNameById(pArrayListBook, idEditorialObtenido, editorialDefinida);
+            	control = editorial_getEditorialNameById(pArrayListEditorial, idEditorialObtenido, editorialDefinida);
 
             	printf("%5d %20s %20s %20.2f %20s \n\n", idLibroObtenido, tituloObtenido, autorObtenido, precioObtenido, editorialDefinida );
         	}
@@ -224,12 +224,12 @@ int controller_ListBooks(LinkedList* pArrayListBook)
  * \return int
  *
  */
-int controller_sortBooks(LinkedList* pArrayListBook)
+int controller_sortBooks(LinkedList* pArrayListBook, LinkedList* pArrayListEditorial)
 {
     int retorno = -1;
 
     if(pArrayListBook != NULL){
-    	retorno = book_sortList(pArrayListBook);
+    	retorno = book_sortList(pArrayListBook, pArrayListEditorial);
     }
 
     return retorno;
@@ -349,7 +349,7 @@ int controller_calculateId(LinkedList* pArrayListBook){
 	return idMax;
 }
 
-int controller_listBooksFromEditorialMinotauro(LinkedList* bookList){
+int controller_listBooksFromEditorialMinotauro(LinkedList* bookList, LinkedList* pArrayEditorial){
 
 	LinkedList* subList;
 
@@ -359,7 +359,7 @@ int controller_listBooksFromEditorialMinotauro(LinkedList* bookList){
 
 	subList = ll_filter(bookList, book_checkAddElementToArray);
 	if(subList != NULL){
-		retorno = controller_ListBooks(subList);
+		retorno = controller_ListBooks(subList,pArrayEditorial);
 	}
 	return retorno;
 }

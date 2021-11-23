@@ -44,7 +44,7 @@ int book_getPrecio(eLibro* this,float* precio);
 
 
 //Ordena la lista de empleados segun el critero del cliente
-int book_sortList(LinkedList* pArrayBook);
+int book_sortList(LinkedList* pArrayBook, LinkedList* pArrayEditorial);
 
 //Ordena la lista de empleados por NOMBRE
 int book_sortByAutor(void* firstBook, void* secondBook);

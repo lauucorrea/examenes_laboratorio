@@ -44,7 +44,7 @@ int main(void) {
 					if(pValidation != -1){
 	            		getString(nameFile, "Ingrese el nombre del archivo a cargar\n", sizeof(nameFile), &pValidation);
 	            		if(pValidation != -1){
-	            			validationControl = controller_loadBooksFromFile(listaLibros, option, &flagBooksLoaded, nameFile);
+	            			validationControl = controller_loadBooksFromFile(listaLibros,listaEditoriales, option, &flagBooksLoaded, nameFile);
 	            		}
 					}else{
 						puts("El dato ingresado es incorrecto");
@@ -53,7 +53,7 @@ int main(void) {
             	}else if(flagBooksLoaded != 0){
             		getString(nameFile, "Ingrese el nombre del archivo a cargar", sizeof(nameFile), &pValidation);
             		if(pValidation != -1){
-            			validationControl = controller_loadBooksFromFile(listaLibros, option, &flagBooksLoaded, nameFile);
+            			validationControl = controller_loadBooksFromFile(listaLibros,listaEditoriales, option, &flagBooksLoaded, nameFile);
             		}
 
             	}
@@ -83,7 +83,7 @@ int main(void) {
 			break;
 			case 3:
             	if(flagBooksLoaded == 0){
-                	validationControl = controller_sortBooks(listaLibros);
+                	validationControl = controller_sortBooks(listaLibros, listaEditoriales);
                     if(validationControl != -1){
                     	puts("La lista se ordeno correctamente");
                     }else{
@@ -96,8 +96,8 @@ int main(void) {
 
 			break;
 			case 4:
-				if(flagBooksLoaded == 0){
-					validationControl = controller_ListBooks(listaLibros);
+				if(flagBooksLoaded == 0 && flagEditorialsLoaded == 0){
+					validationControl = controller_ListBooks(listaLibros, listaEditoriales);
 					if(validationControl != -1){
 						puts("------------------------------------");
 						puts("Libros enlistados exitosamente");
@@ -110,7 +110,7 @@ int main(void) {
             	}
 			break;
 			case 5:
-				validationControl = controller_listBooksFromEditorialMinotauro(listaLibros);
+				validationControl = controller_listBooksFromEditorialMinotauro(listaLibros, listaEditoriales);
 				if(validationControl != -1){
 					puts("------------------------------------");
 					puts("Libros enlistados exitosamente");

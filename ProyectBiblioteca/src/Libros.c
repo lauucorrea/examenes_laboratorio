@@ -165,13 +165,13 @@ eLibro* book_newParametros(char* idStr,char* tituloStr,char* autorStr, char* pre
 	return nuevoLibro;
 }
 
-int book_sortList(LinkedList* pArrayBook){
+int book_sortList(LinkedList* pArrayBook, LinkedList* pArrayEditorial){
 	int retorno = -1;
 
 	if(pArrayBook != NULL){
 		retorno = ll_sort(pArrayBook, book_sortByAutor, 1);
 		if(retorno != -1){
-			retorno = controller_ListBooks(pArrayBook);
+			retorno = controller_ListBooks(pArrayBook, pArrayEditorial);
 			puts("------------------------------------");
 			puts("Lista Ordenada con exito por AUTOR");
 		}
