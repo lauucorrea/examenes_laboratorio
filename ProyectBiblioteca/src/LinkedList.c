@@ -1,4 +1,5 @@
 #include "LinkedList.h"
+#include "Libros.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -612,4 +613,67 @@ LinkedList* ll_filter(LinkedList* this, int (*fn)(void* element)){
 
 	return newll;
 }
+
+LinkedList* ll_map(LinkedList* this, int(*fn)(void* element)){
+	LinkedList* newll;
+	eLibro* libro;
+	void* pElement;
+
+	float precioObtenido;
+	int precioDescuento;
+	int idObtenido;
+	int control;
+
+	newll = ll_newLinkedList();
+
+	if(newll != NULL  && this != NULL){
+		for(int i = 0; i< ll_len(this); i++){
+			pElement = ll_get(this, i);
+			libro = pElement;
+			if(pElement !=NULL && fn(libro) != -1 ){
+				control = ll_add(newll, libro);
+				puts("LLEGUE");
+				if(control != -1){
+					idObtenido = book_getIdEditorial(libro, &idObtenido);
+					control = book_getPrecio(libro, &precioObtenido);
+					if(control != -1){
+						switch(idObtenido){
+							case 1:
+								if(control != -1){
+									precioDescuento = precioObtenido*0.8;
+									control = book_setPrecio(libro, precioDescuento);
+								}
+							break;
+							case 2:
+								if(control != -1){
+									precioDescuento = precioObtenido*0.9;
+									control = book_setPrecio(libro, precioDescuento);
+								}
+							break;
+						}
+						if(control == -1){
+							newll = NULL;
+							break;
+						}
+					}
+				}
+
+
+
+
+			}
+		}
+	}
+
+
+	return newll;
+
+}
+
+
+
+
+
+
+
 

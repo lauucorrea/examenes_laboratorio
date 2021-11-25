@@ -207,8 +207,58 @@ int book_sortByAutor(void* firstBook, void* secondBook){
 int book_checkAddElementToArray(void* auxElement){
 	eLibro* pLibro;
 	int retorno = -1;
+	int idEditorial;
+	int control;
 	pLibro = auxElement;
-	if(pLibro -> idEditorial == 4){
+	control = book_getId(pLibro, &idEditorial);
+
+	if(idEditorial == 4 && control != -1){
+		retorno = 0;
+	}
+
+	return retorno;
+}
+int book_checkIfDisccount(void* element){
+	eLibro* unLibro;
+	float precioLibro;
+	int idEditorial;
+	int controlPrecio;
+	int controlEditorial;
+	int retorno = -1;
+
+	unLibro = book_new();
+	unLibro = element;
+
+	if(unLibro != NULL){
+		controlPrecio = book_getPrecio(element , &precioLibro);
+		controlEditorial = book_getIdEditorial(unLibro, &idEditorial);
+
+		if(controlPrecio != -1 && controlEditorial != -1){
+			if(precioLibro >= 300 && idEditorial== 1){
+				retorno = 0;
+			}
+			if(precioLibro <= 200 && idEditorial == 2){
+				retorno = 0;
+			}
+			if(idEditorial != 1 && idEditorial != 2){
+				retorno = -1;
+			}
+		}
+
+	}
+	return retorno;
+
+
+}
+int book_checkExceptionToAddElementToArray(void* auxElement){
+	eLibro* pLibro;
+	int retorno = -1;
+	int idEditorial;
+	int control;
+	pLibro = auxElement;
+	control = book_getId(pLibro, &idEditorial);
+
+	if(idEditorial != 4){
 		retorno = 0;
 	}
 

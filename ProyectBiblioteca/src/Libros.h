@@ -50,5 +50,10 @@ int book_sortList(LinkedList* pArrayBook, LinkedList* pArrayEditorial);
 int book_sortByAutor(void* firstBook, void* secondBook);
 
 int book_checkAddElementToArray(void* auxElement);
+
+int book_checkExceptionToAddElementToArray(void* auxElement);
+int book_countByEditorialId(LinkedList* this, int id);
+
+int book_checkIfDisccount(void* element);
 #endif // libros_H_INCLUDED
 

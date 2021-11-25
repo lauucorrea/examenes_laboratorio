@@ -14,7 +14,8 @@ int DeployMainMenu(){
     puts("3. Ordenar lista de Libros");
     puts("4. Imprimir libros en pantalla");
     puts("5. Listar libros de la editorial MINOTAURO.");
-    puts("6. Salir.\n");
+    puts("6 .Generar el archivo de salida “mapeado.csv” ");
+    puts("7. Salir.\n");
 
     opcion = IngresarEntero("Elija una opcion:", &validacion);
 

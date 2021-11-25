@@ -116,7 +116,14 @@ int main(void) {
 					puts("Libros enlistados exitosamente");
 				}
 			break;
+			case 6:
+				validationControl = controller_applyDisccountBooks(listaLibros);
+
+				if(validationControl == -1){
+					puts("ERORRR");
+				}
+			break;
 			}
 		}
-	}while(option != 6 && option != -1);
+	}while(option != 7 && option != -1);
 }

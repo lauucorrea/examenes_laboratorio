@@ -65,14 +65,18 @@ int editorial_getId(eEditorial* this,int* id){
 int editorial_getEditorialNameById(LinkedList* pArrayEditorial, int id, char* editorialName){
 	eEditorial* pEditorial;
 	int retorno = -1;
+	char nombre[128];
+	if(pArrayEditorial != NULL){
+		for(int i = 0; i< ll_len(pArrayEditorial); i++){
+			pEditorial = ll_get(pArrayEditorial, i);
+			editorial_getNombre(pEditorial, nombre);
 
-	for(int i = 0; i< ll_len(pArrayEditorial); i++){
-		pEditorial = ll_get(pArrayEditorial, i);
-
-		if(pEditorial ->idEditorial == id){
-			strcpy(editorialName, pEditorial ->nombre);
-			retorno = 0;
+			if(pEditorial ->idEditorial == id){
+				strcpy(editorialName, nombre);
+				retorno = 0;
+			}
 		}
+
 	}
 	return retorno;
 }
@@ -97,5 +101,4 @@ int editorial_getNombre(eEditorial* this,char* nombre){
 
 	return retorno;
 }
-
 

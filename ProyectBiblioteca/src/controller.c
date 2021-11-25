@@ -363,3 +363,40 @@ int controller_listBooksFromEditorialMinotauro(LinkedList* bookList, LinkedList*
 	}
 	return retorno;
 }
+
+int controller_applyDisccountBooks(LinkedList* bookList){
+	LinkedList* subList;
+
+	int retorno = -1;
+
+	subList = ll_newLinkedList();
+
+	subList = ll_map(bookList, book_checkIfDisccount);
+	if(subList != NULL){
+		retorno = 0;
+	}
+
+	return retorno;
+}
+
+int controller_countBooksWithId(LinkedList* pArrayBookList, int id){
+	eLibro* pLibro;
+	int idObtenido;
+	int retorno = -1;
+	int control;
+	int contadorCoincidencias = 0;
+
+	for(int i =0; i<ll_len(pArrayBookList); i++){
+		pLibro = ll_get(pArrayBookList, i);
+		control = book_getId(pLibro, &idObtenido);
+		if(control != -1){
+			contadorCoincidencias++;
+		}
+	}
+
+	if(contadorCoincidencias > 0){
+		retorno =0;
+	}
+
+	return retorno;
+}
