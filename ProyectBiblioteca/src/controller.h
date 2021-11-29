@@ -15,4 +15,4 @@ int controller_loadEditorialsFromText(char* path , LinkedList* pArrayListEditori
 int controller_loadEditorialsFromFile(LinkedList* listaEditoriales ,int option, int* pFlagFileLoaded, char* nameFile);
 
 int controller_listBooksFromEditorialMinotauro(LinkedList* bookList, LinkedList* pArrayEditorial);
-int controller_applyDisccountBooks(LinkedList* bookList);
+int controller_applyDisccountBooksAndSave(char* path,LinkedList* bookList, LinkedList* pArrayListEditorial);

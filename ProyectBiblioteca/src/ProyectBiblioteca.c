@@ -117,10 +117,11 @@ int main(void) {
 				}
 			break;
 			case 6:
-				validationControl = controller_applyDisccountBooks(listaLibros);
+				validationControl = controller_applyDisccountBooksAndSave("src/mapeado.csv", listaLibros, listaEditoriales);
 
-				if(validationControl == -1){
-					puts("ERORRR");
+				if(validationControl != -1){
+					puts("------------------------------------");
+					puts("Libros enlistados exitosamente");
 				}
 			break;
 			}

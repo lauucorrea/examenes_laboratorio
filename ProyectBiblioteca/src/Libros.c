@@ -196,7 +196,7 @@ int book_sortByAutor(void* firstBook, void* secondBook){
 		//El primer nombre es mayor al segundo (va primero)
 		retorno = 1;
 	}
-	if(strcmp(firstAutor,secondAutor) < 0){
+	if(strcmp(firstAutor,secondAutor) < 0 && (control1 != -1 && control2 != -1)){
 		retorno = -1;
 	}
 
@@ -206,50 +206,45 @@ int book_sortByAutor(void* firstBook, void* secondBook){
 
 int book_checkAddElementToArray(void* auxElement){
 	eLibro* pLibro;
+
 	int retorno = -1;
 	int idEditorial;
 	int control;
-	pLibro = auxElement;
-	control = book_getId(pLibro, &idEditorial);
 
-	if(idEditorial == 4 && control != -1){
-		retorno = 0;
+
+	if(auxElement != NULL){
+		pLibro = (eLibro*)auxElement;
+		control = book_getIdEditorial(pLibro, &idEditorial);
+
+		if(idEditorial == 4 && control != -1){
+			retorno = 0;
+		}
 	}
+
 
 	return retorno;
 }
 int book_checkIfDisccount(void* element){
-	eLibro* unLibro;
-	float precioLibro;
+	int retorno = 0;
 	int idEditorial;
-	int controlPrecio;
-	int controlEditorial;
-	int retorno = -1;
+	float precio;
 
-	unLibro = book_new();
-	unLibro = element;
+	book_getIdEditorial(element, &idEditorial);
+	book_getPrecio(element, &precio);
 
-	if(unLibro != NULL){
-		controlPrecio = book_getPrecio(element , &precioLibro);
-		controlEditorial = book_getIdEditorial(unLibro, &idEditorial);
-
-		if(controlPrecio != -1 && controlEditorial != -1){
-			if(precioLibro >= 300 && idEditorial== 1){
-				retorno = 0;
-			}
-			if(precioLibro <= 200 && idEditorial == 2){
-				retorno = 0;
-			}
-			if(idEditorial != 1 && idEditorial != 2){
-				retorno = -1;
-			}
-		}
-
+	if(idEditorial == 1 && precio >= 300) {
+		precio =  precio * 0.8;
+		book_setPrecio(element, precio);
+		retorno = 1;
+	}
+	if(idEditorial == 2 && precio <= 200) {
+		precio = precio * 0.9;
+		book_setPrecio(element, precio);
+		retorno = 1;
 	}
 	return retorno;
-
-
 }
+
 int book_checkExceptionToAddElementToArray(void* auxElement){
 	eLibro* pLibro;
 	int retorno = -1;

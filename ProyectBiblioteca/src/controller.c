@@ -354,28 +354,32 @@ int controller_listBooksFromEditorialMinotauro(LinkedList* bookList, LinkedList*
 	LinkedList* subList;
 
 	int retorno = -1;
-
-	subList = ll_newLinkedList();
-
+	//int id = (int) valorCriterio;
 	subList = ll_filter(bookList, book_checkAddElementToArray);
+
 	if(subList != NULL){
 		retorno = controller_ListBooks(subList,pArrayEditorial);
 	}
 	return retorno;
 }
 
-int controller_applyDisccountBooks(LinkedList* bookList){
-	LinkedList* subList;
+int controller_applyDisccountBooksAndSave(char* path,LinkedList* bookList, LinkedList* pArrayListEditorial){
 
 	int retorno = -1;
+	LinkedList* disccountedList = NULL;
 
-	subList = ll_newLinkedList();
+	if(bookList != NULL && ll_isEmpty(bookList) != 1) {
 
-	subList = ll_map(bookList, book_checkIfDisccount);
-	if(subList != NULL){
-		retorno = 0;
+		disccountedList = ll_map(bookList, book_checkIfDisccount);
+
+		if(disccountedList != NULL && path != NULL){
+			retorno = controller_saveBookAsText(path, disccountedList);
+			if(retorno != -1){
+				controller_ListBooks(disccountedList, pArrayListEditorial);
+			}
+
+		}
 	}
-
 	return retorno;
 }
 

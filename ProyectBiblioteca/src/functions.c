@@ -19,7 +19,7 @@ int DeployMainMenu(){
 
     opcion = IngresarEntero("Elija una opcion:", &validacion);
 
-	if(validacion == 0 && opcion!= 6){
+	if(validacion == 0 && opcion!= 7){
 		retorno = opcion;
 	}else{
 		retorno = -1;;

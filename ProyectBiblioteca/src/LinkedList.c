@@ -563,7 +563,7 @@ int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
                 elementoJ= ll_get(this,j);
                 pAux = elementoI;
 
-                if(order == 1 && pFunc(elementoI,elementoJ) > 0)
+                if((order == 1 && pFunc(elementoI,elementoJ) > 0) || (order == 0 && pFunc(elementoI,elementoJ) < 0) )
                 {
                     control1 = ll_set(this, i, elementoJ);
                     control2 = ll_set(this, j, pAux);
@@ -603,7 +603,6 @@ LinkedList* ll_filter(LinkedList* this, int (*fn)(void* element)){
 					control = ll_add(newll, pElement);
 					if(control == -1){
 						newll = NULL;
-                        puts("ERROR al cargar elementos en la lista");
 						break;
 					}
 				}
@@ -615,57 +614,22 @@ LinkedList* ll_filter(LinkedList* this, int (*fn)(void* element)){
 }
 
 LinkedList* ll_map(LinkedList* this, int(*fn)(void* element)){
-	LinkedList* newll;
-	eLibro* libro;
-	void* pElement;
-
-	float precioObtenido;
-	int precioDescuento;
-	int idObtenido;
-	int control;
+	LinkedList* newll = NULL;
+	void* auxElement = NULL;
 
 	newll = ll_newLinkedList();
 
-	if(newll != NULL  && this != NULL){
-		for(int i = 0; i< ll_len(this); i++){
-			pElement = ll_get(this, i);
-			libro = pElement;
-			if(pElement !=NULL && fn(libro) != -1 ){
-				control = ll_add(newll, libro);
-				puts("LLEGUE");
-				if(control != -1){
-					idObtenido = book_getIdEditorial(libro, &idObtenido);
-					control = book_getPrecio(libro, &precioObtenido);
-					if(control != -1){
-						switch(idObtenido){
-							case 1:
-								if(control != -1){
-									precioDescuento = precioObtenido*0.8;
-									control = book_setPrecio(libro, precioDescuento);
-								}
-							break;
-							case 2:
-								if(control != -1){
-									precioDescuento = precioObtenido*0.9;
-									control = book_setPrecio(libro, precioDescuento);
-								}
-							break;
-						}
-						if(control == -1){
-							newll = NULL;
-							break;
-						}
-					}
-				}
+	if(newll != NULL) {
 
+		for(int i = 0; i<ll_len(this); i++) {
 
+			auxElement = ll_get(this, i);
 
-
+			if(auxElement != NULL && fn(auxElement) == 1) {
+				ll_add(newll, auxElement);
 			}
 		}
 	}
-
-
 	return newll;
 
 }
