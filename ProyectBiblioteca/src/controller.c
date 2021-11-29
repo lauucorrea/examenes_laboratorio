@@ -349,13 +349,12 @@ int controller_calculateId(LinkedList* pArrayListBook){
 	return idMax;
 }
 
-int controller_listBooksFromEditorialMinotauro(LinkedList* bookList, LinkedList* pArrayEditorial){
+int controller_listBooksFromEditorialMinotauro(LinkedList* bookList, LinkedList* pArrayEditorial, void* valorCriterio){
 
 	LinkedList* subList;
 
 	int retorno = -1;
-	//int id = (int) valorCriterio;
-	subList = ll_filter(bookList, book_checkAddElementToArray);
+	subList = ll_filter(bookList, book_checkAddElementToArray, valorCriterio);
 
 	if(subList != NULL){
 		retorno = controller_ListBooks(subList,pArrayEditorial);

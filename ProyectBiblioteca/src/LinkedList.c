@@ -1,5 +1,4 @@
 #include "LinkedList.h"
-#include "Libros.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -588,10 +587,10 @@ int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
 
 }
 
-LinkedList* ll_filter(LinkedList* this, int (*fn)(void* element)){
+LinkedList* ll_filter(LinkedList* this, int (*fn)(void* element, void* element2), void* criterio){
 	LinkedList* newll;
 	void* pElement;
-
+	int idCriterio = (int)criterio;
 	int control;
 
 	newll = ll_newLinkedList();
@@ -599,7 +598,7 @@ LinkedList* ll_filter(LinkedList* this, int (*fn)(void* element)){
 	if(newll != NULL  && this != NULL){
 		for(int i = 0; i< ll_len(this); i++){
 			pElement = ll_get(this, i);
-			if(pElement !=NULL && fn(pElement) != -1 ){
+			if(pElement !=NULL && fn(pElement, idCriterio) != -1 ){
 					control = ll_add(newll, pElement);
 					if(control == -1){
 						newll = NULL;

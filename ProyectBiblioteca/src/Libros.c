@@ -204,9 +204,10 @@ int book_sortByAutor(void* firstBook, void* secondBook){
 }
 
 
-int book_checkAddElementToArray(void* auxElement){
+int book_checkAddElementToArray(void* auxElement, void* criterio){
 	eLibro* pLibro;
 
+	int idCriterio = (int) criterio;
 	int retorno = -1;
 	int idEditorial;
 	int control;
@@ -216,7 +217,7 @@ int book_checkAddElementToArray(void* auxElement){
 		pLibro = (eLibro*)auxElement;
 		control = book_getIdEditorial(pLibro, &idEditorial);
 
-		if(idEditorial == 4 && control != -1){
+		if(idEditorial == idCriterio && control != -1){
 			retorno = 0;
 		}
 	}

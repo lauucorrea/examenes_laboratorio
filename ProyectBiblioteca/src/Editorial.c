@@ -66,6 +66,7 @@ int editorial_getEditorialNameById(LinkedList* pArrayEditorial, int id, char* ed
 	eEditorial* pEditorial;
 	int retorno = -1;
 	char nombre[128];
+
 	if(pArrayEditorial != NULL){
 		for(int i = 0; i< ll_len(pArrayEditorial); i++){
 			pEditorial = ll_get(pArrayEditorial, i);

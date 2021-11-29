@@ -110,7 +110,7 @@ int main(void) {
             	}
 			break;
 			case 5:
-				validationControl = controller_listBooksFromEditorialMinotauro(listaLibros, listaEditoriales);
+				validationControl = controller_listBooksFromEditorialMinotauro(listaLibros, listaEditoriales,4);
 				if(validationControl != -1){
 					puts("------------------------------------");
 					puts("Libros enlistados exitosamente");
