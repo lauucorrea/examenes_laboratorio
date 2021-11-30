@@ -1,3 +1,12 @@
+/*
+ * controller.h
+ *
+ *  Created on: 25 Nov 2021
+ *      Author: Lauta
+ */
+
+#ifndef CONTROLLER_H_
+#define CONTROLLER_H_
 
 int controller_sortBooks(LinkedList* pArrayListBook, LinkedList* pArrayListEditorial);
 int controller_calculateId(LinkedList* pArrayListBook);
@@ -14,5 +23,5 @@ int controller_loadBooksFromText(char* path , LinkedList* pArrayListBook);
 int controller_loadEditorialsFromText(char* path , LinkedList* pArrayListEditorial);
 int controller_loadEditorialsFromFile(LinkedList* listaEditoriales ,int option, int* pFlagFileLoaded, char* nameFile);
 
-int controller_listBooksFromEditorialMinotauro(LinkedList* bookList, LinkedList* pArrayEditorial, void* valorCriterio);
-int controller_applyDisccountBooksAndSave(char* path,LinkedList* bookList, LinkedList* pArrayListEditorial);
+int controller_listBooksFromEditorialMinotauro(LinkedList* bookList, LinkedList* pArrayEditorial);
+#endif /* CONTROLLER_H_ */

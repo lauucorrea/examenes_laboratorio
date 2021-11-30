@@ -14,12 +14,11 @@ int DeployMainMenu(){
     puts("3. Ordenar lista de Libros");
     puts("4. Imprimir libros en pantalla");
     puts("5. Listar libros de la editorial MINOTAURO.");
-    puts("6 .Generar el archivo de salida “mapeado.csv” ");
-    puts("7. Salir.\n");
+    puts("6. Salir.\n");
 
     opcion = IngresarEntero("Elija una opcion:", &validacion);
 
-	if(validacion == 0 && opcion!= 7){
+	if(validacion == 0 && opcion!= 6){
 		retorno = opcion;
 	}else{
 		retorno = -1;;
@@ -176,5 +175,19 @@ void getString(char cadena[], char mensaje[], int tam, int* validacion)
 		}
 
 	}
+}
+
+int FindMaxNumber(int num1, int num2){
+	int retorno = -1;
+	 if(num1 > num2){
+		 retorno = 1;
+	 }
+	 if(num1 < num2){
+		 retorno = 2;
+	 }
+	 if(num1 == num2){
+		 retorno = 0;
+	 }
+	 return retorno;
 }
 

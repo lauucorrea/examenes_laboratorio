@@ -207,7 +207,7 @@ int controller_ListBooks(LinkedList* pArrayListBook, LinkedList* pArrayListEdito
 
             	control = editorial_getEditorialNameById(pArrayListEditorial, idEditorialObtenido, editorialDefinida);
 
-            	printf("%5d %20s %20s %20.2f %20s \n\n", idLibroObtenido, tituloObtenido, autorObtenido, precioObtenido, editorialDefinida );
+            	//printf("%5d %20s %20s %20.2f %20s \n\n", idLibroObtenido, tituloObtenido, autorObtenido, precioObtenido, editorialDefinida );
         	}
 
         }
@@ -349,57 +349,17 @@ int controller_calculateId(LinkedList* pArrayListBook){
 	return idMax;
 }
 
-int controller_listBooksFromEditorialMinotauro(LinkedList* bookList, LinkedList* pArrayEditorial, void* valorCriterio){
+int controller_listBooksFromEditorialMinotauro(LinkedList* bookList, LinkedList* pArrayEditorial){
 
 	LinkedList* subList;
 
 	int retorno = -1;
-	subList = ll_filter(bookList, book_checkAddElementToArray, valorCriterio);
 
+	subList = ll_newLinkedList();
+
+	subList = ll_filter(bookList, book_checkAddElementToArray);
 	if(subList != NULL){
 		retorno = controller_ListBooks(subList,pArrayEditorial);
 	}
-	return retorno;
-}
-
-int controller_applyDisccountBooksAndSave(char* path,LinkedList* bookList, LinkedList* pArrayListEditorial){
-
-	int retorno = -1;
-	LinkedList* disccountedList = NULL;
-
-	if(bookList != NULL && ll_isEmpty(bookList) != 1) {
-
-		disccountedList = ll_map(bookList, book_checkIfDisccount);
-
-		if(disccountedList != NULL && path != NULL){
-			retorno = controller_saveBookAsText(path, disccountedList);
-			if(retorno != -1){
-				controller_ListBooks(disccountedList, pArrayListEditorial);
-			}
-
-		}
-	}
-	return retorno;
-}
-
-int controller_countBooksWithId(LinkedList* pArrayBookList, int id){
-	eLibro* pLibro;
-	int idObtenido;
-	int retorno = -1;
-	int control;
-	int contadorCoincidencias = 0;
-
-	for(int i =0; i<ll_len(pArrayBookList); i++){
-		pLibro = ll_get(pArrayBookList, i);
-		control = book_getId(pLibro, &idObtenido);
-		if(control != -1){
-			contadorCoincidencias++;
-		}
-	}
-
-	if(contadorCoincidencias > 0){
-		retorno =0;
-	}
-
 	return retorno;
 }

@@ -110,15 +110,7 @@ int main(void) {
             	}
 			break;
 			case 5:
-				validationControl = controller_listBooksFromEditorialMinotauro(listaLibros, listaEditoriales,4);
-				if(validationControl != -1){
-					puts("------------------------------------");
-					puts("Libros enlistados exitosamente");
-				}
-			break;
-			case 6:
-				validationControl = controller_applyDisccountBooksAndSave("src/mapeado.csv", listaLibros, listaEditoriales);
-
+				validationControl = controller_listBooksFromEditorialMinotauro(listaLibros, listaEditoriales);
 				if(validationControl != -1){
 					puts("------------------------------------");
 					puts("Libros enlistados exitosamente");
@@ -126,5 +118,5 @@ int main(void) {
 			break;
 			}
 		}
-	}while(option != 7 && option != -1);
+	}while(option != 6 && option != -1);
 }

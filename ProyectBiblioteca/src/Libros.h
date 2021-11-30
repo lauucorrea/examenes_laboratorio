@@ -49,11 +49,6 @@ int book_sortList(LinkedList* pArrayBook, LinkedList* pArrayEditorial);
 //Ordena la lista de empleados por NOMBRE
 int book_sortByAutor(void* firstBook, void* secondBook);
 
-int book_checkAddElementToArray(void* auxElement, void* criterio);
-
-int book_checkExceptionToAddElementToArray(void* auxElement);
-int book_countByEditorialId(LinkedList* this, int id);
-
-int book_checkIfDisccount(void* element);
+int book_checkAddElementToArray(void* auxElement);
 #endif // libros_H_INCLUDED
 

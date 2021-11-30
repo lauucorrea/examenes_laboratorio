@@ -562,7 +562,7 @@ int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
                 elementoJ= ll_get(this,j);
                 pAux = elementoI;
 
-                if((order == 1 && pFunc(elementoI,elementoJ) > 0) || (order == 0 && pFunc(elementoI,elementoJ) < 0) )
+                if(order == 1 && pFunc(elementoI,elementoJ) > 0)
                 {
                     control1 = ll_set(this, i, elementoJ);
                     control2 = ll_set(this, j, pAux);
@@ -587,10 +587,10 @@ int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
 
 }
 
-LinkedList* ll_filter(LinkedList* this, int (*fn)(void* element, void* element2), void* criterio){
+LinkedList* ll_filter(LinkedList* this, int (*fn)(void* element)){
 	LinkedList* newll;
 	void* pElement;
-	int idCriterio = (int)criterio;
+
 	int control;
 
 	newll = ll_newLinkedList();
@@ -598,7 +598,7 @@ LinkedList* ll_filter(LinkedList* this, int (*fn)(void* element, void* element2)
 	if(newll != NULL  && this != NULL){
 		for(int i = 0; i< ll_len(this); i++){
 			pElement = ll_get(this, i);
-			if(pElement !=NULL && fn(pElement, idCriterio) != -1 ){
+			if(pElement !=NULL && fn(pElement) != -1 ){
 					control = ll_add(newll, pElement);
 					if(control == -1){
 						newll = NULL;
@@ -611,32 +611,4 @@ LinkedList* ll_filter(LinkedList* this, int (*fn)(void* element, void* element2)
 
 	return newll;
 }
-
-LinkedList* ll_map(LinkedList* this, int(*fn)(void* element)){
-	LinkedList* newll = NULL;
-	void* auxElement = NULL;
-
-	newll = ll_newLinkedList();
-
-	if(newll != NULL) {
-
-		for(int i = 0; i<ll_len(this); i++) {
-
-			auxElement = ll_get(this, i);
-
-			if(auxElement != NULL && fn(auxElement) == 1) {
-				ll_add(newll, auxElement);
-			}
-		}
-	}
-	return newll;
-
-}
-
-
-
-
-
-
-
 

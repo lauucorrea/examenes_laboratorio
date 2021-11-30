@@ -65,20 +65,26 @@ int editorial_getId(eEditorial* this,int* id){
 int editorial_getEditorialNameById(LinkedList* pArrayEditorial, int id, char* editorialName){
 	eEditorial* pEditorial;
 	int retorno = -1;
-	char nombre[128];
+	int idEditorial;
+	char name[128];
 
-	if(pArrayEditorial != NULL){
+	if(pArrayEditorial != NULL && editorialName != NULL){
 		for(int i = 0; i< ll_len(pArrayEditorial); i++){
 			pEditorial = ll_get(pArrayEditorial, i);
-			editorial_getNombre(pEditorial, nombre);
+			idEditorial = editorial_getId(pEditorial, &idEditorial);
 
-			if(pEditorial ->idEditorial == id){
-				strcpy(editorialName, nombre);
+			if(pEditorial != NULL && idEditorial == id){
 				retorno = 0;
+				printf("EL CONTROL ES %d", retorno);
+				retorno = editorial_getNombre(pEditorial, editorialName);
+				if(retorno != -1){
+					strcpy(editorialName, name);
+				}
+
 			}
 		}
-
 	}
+
 	return retorno;
 }
 
@@ -102,4 +108,5 @@ int editorial_getNombre(eEditorial* this,char* nombre){
 
 	return retorno;
 }
+
 
